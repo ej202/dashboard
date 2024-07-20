@@ -9,11 +9,11 @@
         </div>
 
         <div class="section-header">
-            <h2>Today's Growth Plan</h2>
+            <h2>Today's Goals</h2>
             <button class="view-all-button">View My Progress</button>
         </div>
         <div id="goals-container">
-            <!-- Static content or empty div for goals -->
+            <!-- Goals will be loaded here by JavaScript -->
         </div>
         <!-- Other content sections -->
 
@@ -34,6 +34,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const contentDiv = document.querySelector('.todays-practice');
+    const goalsContainer = document.getElementById('goals-container');
 
     // Fetch initial content
     fetch('/wp-content/themes/kadence-child/scripts/get-next-content.php')
@@ -50,22 +51,22 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching content:', error));
 
-    // Commenting out the fetch call to get-goals.php
-    // fetch('/wp-content/themes/kadence-child/scripts/get-goals.php')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         goalsContainer.innerHTML = '';
-    //         if (data.goals && data.goals.length > 0) {
-    //             data.goals.forEach(goal => {
-    //                 const goalElement = document.createElement('div');
-    //                 goalElement.className = 'goal-item';
-    //                 goalElement.innerHTML = `<p${goal.primary && goal.completed ? ' style="text-decoration: line-through;"' : ''}>${goal.content}</p>`;
-    //                 goalsContainer.appendChild(goalElement);
-    //             });
-    //         } else {
-    //             goalsContainer.innerHTML = '<p>No goals found for the current lesson.</p>';
-    //         }
-    //     })
-    //     .catch(error => console.error('Error fetching goals:', error));
+    // Fetch goals
+    fetch('/wp-content/themes/kadence-child/scripts/get-goals.php')
+        .then(response => response.json())
+        .then(data => {
+            goalsContainer.innerHTML = '';
+            if (data.goals && data.goals.length > 0) {
+                data.goals.forEach(goal => {
+                    const goalElement = document.createElement('div');
+                    goalElement.className = 'goal-item';
+                    goalElement.innerHTML = `<p${goal.primary && goal.completed ? ' style="text-decoration: line-through;"' : ''}>${goal.content}</p>`;
+                    goalsContainer.appendChild(goalElement);
+                });
+            } else {
+                goalsContainer.innerHTML = '<p>No goals found for the current lesson.</p>';
+            }
+        })
+        .catch(error => console.error('Error fetching goals:', error));
 });
 </script>

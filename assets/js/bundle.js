@@ -1,0 +1,32 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./assets/js/custom.js":
+/*!*****************************!*\
+  !*** ./assets/js/custom.js ***!
+  \*****************************/
+/***/ (() => {
+
+eval("jQuery(document).ready(function ($) {\n  console.log('Document is ready');\n\n  // Ensure modals are hidden initially\n  $('#durationModal').hide();\n  $('#voiceModal').hide();\n  var audioElement = new Audio();\n  var selectedDuration = '';\n  var selectedVoice = '';\n  function loadContent(target) {\n    console.log('Loading content for target:', target);\n    $('.content').hide(); // Hide all content areas\n    $('#' + target).show(); // Show the target content area\n  }\n  function setupPlayer() {\n    var isPlaying = false;\n    var playPauseButton = $('#playPauseButton');\n    var playPauseIcon = $('#playPauseIcon');\n    var selectDurationButton = $('#selectDurationButton');\n    var selectVoiceButton = $('#selectVoiceButton');\n    var durationModal = $('#durationModal');\n    var voiceModal = $('#voiceModal');\n    var durationClose = $('#durationClose');\n    var voiceClose = $('#voiceClose');\n    selectDurationButton.off('click').on('click', function () {\n      console.log('Opening duration modal');\n      durationModal.fadeIn();\n    });\n    selectVoiceButton.off('click').on('click', function () {\n      console.log('Opening voice modal');\n      voiceModal.fadeIn();\n    });\n    $('.modal-option').off('click').on('click', function () {\n      var value = $(this).data('value');\n      if ($(this).parent().parent().attr('id') === 'durationModal') {\n        selectedDuration = value;\n        selectDurationButton.text(value + ' minutes');\n      } else {\n        selectedVoice = value;\n        selectVoiceButton.text(value.charAt(0).toUpperCase() + value.slice(1));\n      }\n      $(this).parent().parent().fadeOut();\n    });\n    durationClose.off('click').on('click', function () {\n      console.log('Closing duration modal');\n      durationModal.fadeOut();\n    });\n    voiceClose.off('click').on('click', function () {\n      console.log('Closing voice modal');\n      voiceModal.fadeOut();\n    });\n    playPauseButton.off('click').on('click', function () {\n      if (!selectedDuration || !selectedVoice) {\n        alert('Please select both duration and voice.');\n        return;\n      }\n      isPlaying = !isPlaying;\n      if (isPlaying) {\n        playPauseIcon.removeClass('fa-play').addClass('fa-pause');\n        playSelectedAudio(selectedDuration, selectedVoice);\n      } else {\n        playPauseIcon.removeClass('fa-pause').addClass('fa-play');\n        pauseAudio();\n      }\n    });\n    function playSelectedAudio(duration, voice) {\n      var audioSrc = getAudioSource(duration, voice);\n      audioElement.src = audioSrc;\n      audioElement.play();\n    }\n    function pauseAudio() {\n      audioElement.pause();\n    }\n    function getAudioSource(duration, voice) {\n      return \"/wp-content/themes/kadence-child/audios/\".concat(voice, \"_\").concat(duration, \".mp3\");\n    }\n  }\n  function startBreathePacer() {\n    var pacer = $('.breathe-pacer');\n    var text = $('.breathe-text');\n    var inhale = true;\n    pacer.off('click').on('click', function () {\n      if (pacer.hasClass('active')) return; // Prevent multiple intervals\n\n      pacer.addClass('active');\n      text.text('Inhale');\n      pacer.addClass('shrink');\n      setTimeout(function () {\n        text.css('opacity', '1');\n        setInterval(function () {\n          if (inhale) {\n            text.css('opacity', '0');\n            setTimeout(function () {\n              text.text('Exhale').css('opacity', '1');\n              pacer.removeClass('shrink');\n            }, 1000); // 1-second pause before changing to exhale\n          } else {\n            text.css('opacity', '0');\n            setTimeout(function () {\n              text.text('Inhale').css('opacity', '1');\n              pacer.addClass('shrink');\n            }, 1000); // 1-second pause before changing to inhale\n          }\n          inhale = !inhale;\n        }, 6000); // 5 seconds for each inhale/exhale + 1-second pause\n      }, 5000); // Initial shrink time\n    });\n  }\n\n  // Make the Today link active by default and load its content\n  var defaultTarget = 'today';\n  loadContent(defaultTarget);\n  $('.nav-item').click(function (e) {\n    e.preventDefault();\n    var target = $(this).data('target');\n\n    // Remove active class from all links and add to the clicked link\n    $('.nav-item').removeClass('active');\n    $(this).addClass('active');\n\n    // Load the content\n    loadContent(target);\n\n    // Additional setup for specific sections\n    if (target === 'now') {\n      setupPlayer();\n    }\n    if (target === 'breathe') {\n      startBreathePacer();\n    }\n  });\n\n  // Check for modal visibility\n  function checkModals() {\n    if ($('#durationModal').is(':visible')) {\n      console.log('Duration modal is open');\n    }\n    if ($('#voiceModal').is(':visible')) {\n      console.log('Voice modal is open');\n    }\n  }\n\n  // Set an interval to check for modals being open\n  setInterval(checkModals, 1000);\n});\n\n//# sourceURL=webpack://kadence-child/./assets/js/custom.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./assets/js/custom.js"]();
+/******/ 	
+/******/ })()
+;

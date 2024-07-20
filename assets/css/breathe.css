@@ -1,0 +1,48 @@
+/* Breathe Pacer Styles */
+.breathe-pacer-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.breathe-pacer {
+    width: 200px;
+    height: 200px;
+    border: 6px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    transition: all 5s ease-in-out;
+    cursor: pointer;
+    animation: wave 3s infinite ease-in-out;
+}
+
+.breathe-pacer.shrink {
+    width: 100px;
+    height: 100px;
+}
+
+.breathe-text {
+    transition: opacity 1s ease-in-out;
+}
+
+/* Animation for wave effect */
+@keyframes wave {
+    0%, 100% {
+        border-radius: 50%;
+    }
+    50% {
+        border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+    }
+}

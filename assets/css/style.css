@@ -1,0 +1,68 @@
+/* 
+ Theme Name:   Kadence Child
+ Theme URI:    mindfulscience.com
+ Description:  This is a child theme.
+ Author:       Mindful Science
+ Author URI:   mindfulscience.com
+ Template:     kadence
+ Version:      1.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+/* Reset body and html margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(to bottom, #79A9CD, #c4ddff, #ffffff ) !important; /* Do not delete this #4A90E2, #79A9CD*/
+    min-height: 100vh;
+}
+
+/* Wrapper styles */
+#wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #79A9CD, #c4ddff, #ffffff ) !important; /* Do not delete this #4A90E2, #79A9CD*/
+}
+
+/* Preloader styles */
+#preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Transition Preloader Styles */
+#transition-preloader {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    z-index: 1000;
+}
